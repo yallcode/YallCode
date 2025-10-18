@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YallCode - Apps, Games, Websites, YouTube, Discord & More</title>
+    <link rel="icon" href="icon.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(to right, #4CAF50, #2196F3);
+            color: white;
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+        nav {
+            background-color: #FF5722;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        nav a {
+            color: white;
+            padding: 1rem;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        nav a:hover {
+            background-color: #FFC107;
+            color: black;
+        }
+        section {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 1rem auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        section:nth-child(even) {
+            background-color: #e3f2fd;
+        }
+        h2 {
+            color: #E91E63;
+            cursor: pointer;
+        }
+        .item {
+            background-color: #fff9c4;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .item:hover {
+            transform: scale(1.02);
+        }
+        .hidden {
+            display: none;
+        }
+        footer {
+            background: linear-gradient(to right, #2196F3, #4CAF50);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            width: 100%;
+        }
+        @media (max-width: 768px) {
+            header {
+                padding: 2rem 1rem;
+            }
+            nav a {
+                flex: 1 1 50%;
+                text-align: center;
+            }
+            section {
+                padding: 1rem;
+                margin: 0.5rem;
+            }
+            .item iframe {
+                width: 100%;
+                height: auto;
+            }
+        }
+        @media (max-width: 480px) {
+            nav a {
+                flex: 1 1 100%;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Welcome to YallCode</h1>
+        <p>Discover my apps, games, websites, YouTube channel, Discord server, and more!</p>
+    </header>
+
+    <nav>
+        <a href="#apps">Apps</a>
+        <a href="#games">Games</a>
+        <a href="#websites">Websites</a>
+        <a href="#youtube">YouTube</a>
+        <a href="#discord">Discord</a>
+        <a href="#more">More</a>
+    </nav>
+
+    <section id="apps">
+        <h2 onclick="toggleSection('apps')">My Apps</h2>
+        <div class="item">
+            <h3>App Name 1</h3>
+            <p>Description of your first app. What it does, platforms it's available on, etc.</p>
+            <a href="link-to-app-store-or-download">Download Here</a>
+        </div>
+        <div class="item hidden">
+            <h3>App Name 2</h3>
+            <p>Description of your second app.</p>
+            <a href="link-to-app">Check It Out</a>
+        </div>
+    </section>
+
+    <section id="games">
+        <h2 onclick="toggleSection('games')">My Games</h2>
+        <div class="item">
+            <h3>Game Title 1</h3>
+            <p>Brief overview of the game, genre, platforms.</p>
+            <a href="link-to-game">Play Now</a>
+        </div>
+        <div class="item hidden">
+            <h3>Game Title 2</h3>
+            <p>Another game description.</p>
+            <a href="link-to-game">Learn More</a>
+        </div>
+    </section>
+
+    <section id="websites">
+        <h2 onclick="toggleSection('websites')">My Websites</h2>
+        <div class="item">
+            <h3>Website Name 1</h3>
+            <p>What the website is about.</p>
+            <a href="https://your-website1.com">Visit Site</a>
+        </div>
+        <div class="item hidden">
+            <h3>Website Name 2</h3>
+            <p>Description here.</p>
+            <a href="https://your-website2.com">Go There</a>
+        </div>
+    </section>
+
+    <section id="youtube">
+        <h2 onclick="toggleSection('youtube')">My YouTube Channel</h2>
+        <div class="item">
+            <p>Subscribe to my channel for tutorials, gameplay, and more!</p>
+            <a href="https://www.youtube.com/@yallaycode">Subscribe on YouTube</a>
+        </div>
+    </section>
+
+    <section id="discord">
+        <h2 onclick="toggleSection('discord')">My Discord Server</h2>
+        <div class="item">
+            <p>Join my community on Discord for discussions, updates, and fun!</p>
+            <a href="https://discord.gg/5g77KWdC">Join Discord</a>
+        </div>
+    </section>
+
+    <section id="more">
+        <h2 onclick="toggleSection('more')">More About Me</h2>
+        <div class="item">
+            <p>Additional info, like blogs, social media, contact details, etc.</p>
+            <ul>
+                <li><a href="https://x.com/YallCode">X (Twitter)</a></li>
+                <li><a href="https://whatsapp.com/channel/0029Vb6nYxwHgZWXHu4Bdd07">WhatsApp Channel</a></li>
+                <li>Email: yallcc.info@gmail.com</li>
+                <li>Main Email: yallbertgoum@gmail.com</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 YallCode. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const items = section.getElementsByClassName('item');
+            for (let item of items) {
+                item.classList.toggle('hidden');
+            }
+        }
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+
+</body>
+</html>
