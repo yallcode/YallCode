@@ -5,71 +5,336 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YallCode - Apps, Games, Websites, YouTube, Discord & More</title>
     <link rel="icon" href="icon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #ff6b6b;
+            --secondary-color: #4ecdc4;
+            --accent-color: #45b7d1;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+            --card-bg: #fff3e0;
+            --border-color: #ff9800;
+        }
+        [data-theme="dark"] {
+            --text-color: #e0e0e0;
+            --bg-color: #1a1a1a;
+            --card-bg: #2d2d2d;
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f8ff;
-            color: #333;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .spinner {
+            border: 4px solid var(--primary-color);
+            border-top: 4px solid transparent;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         header {
-            background: linear-gradient(to right, #4CAF50, #2196F3);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
             color: white;
             text-align: center;
             padding: 4rem 1rem;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('icon.png') no-repeat center/cover;
+            opacity: 0.1;
+        }
+        header img {
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 1rem;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        header img:hover {
+            transform: scale(1.1);
         }
         nav {
-            background-color: #FF5722;
+            background-color: var(--primary-color);
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         nav a {
             color: white;
-            padding: 1rem;
+            padding: 1rem 1.5rem;
             text-decoration: none;
             font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
         nav a:hover {
-            background-color: #FFC107;
-            color: black;
+            background-color: #ff8a8a;
+            color: white;
+            transform: translateY(-2px);
+        }
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background 0.3s ease;
+        }
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.3);
         }
         section {
             padding: 2rem;
             max-width: 1200px;
-            margin: 1rem auto;
+            margin: 2rem auto;
             background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            animation: slideInUp 0.5s ease-out;
+        }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
         }
         section:nth-child(even) {
             background-color: #e3f2fd;
         }
+        [data-theme="dark"] section {
+            background-color: var(--card-bg);
+        }
+        [data-theme="dark"] section:nth-child(even) {
+            background-color: #37474f;
+        }
         h2 {
-            color: #E91E63;
+            color: #e91e63;
             cursor: pointer;
-        }
-        .item {
-            background-color: #fff9c4;
-            padding: 1.5rem;
+            font-size: 2rem;
             margin-bottom: 1rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            font-weight: 700;
         }
-        .item:hover {
+        [data-theme="dark"] h2 {
+            color: #f06292;
+        }
+        h2:hover {
+            color: #ad1457;
             transform: scale(1.02);
         }
-        .hidden {
+        h2::before {
+            content: '▶';
+            margin-right: 0.5rem;
+            transition: transform 0.3s ease;
+            font-size: 1.2rem;
+        }
+        h2.active::before {
+            transform: rotate(90deg);
+        }
+        .item {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--border-color);
+            opacity: 1;
+        }
+        [data-theme="dark"] .item {
+            background-color: #3d3d3d;
+        }
+        .item:hover {
+            transform: translateX(10px) scale(1.02);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .item.hidden {
             display: none;
         }
+        .search-container {
+            max-width: 1200px;
+            margin: 1rem auto;
+            padding: 0 2rem;
+        }
+        #searchInput {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        #searchInput:focus {
+            border-color: var(--primary-color);
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .stat {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        .stats-label {
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+        .carousel-container {
+            position: relative;
+            max-width: 600px;
+            margin: 2rem auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .carousel-slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .slide {
+            min-width: 100%;
+            padding: 2rem;
+            background: var(--card-bg);
+            text-align: center;
+            box-sizing: border-box;
+        }
+        [data-theme="dark"] .slide {
+            background: #3d3d3d;
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: background 0.3s ease;
+        }
+        .carousel-btn:hover {
+            background: rgba(0,0,0,0.7);
+        }
+        .carousel-btn.prev { left: 10px; }
+        .carousel-btn.next { right: 10px; }
         footer {
-            background: linear-gradient(to right, #2196F3, #4CAF50);
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
             color: white;
             text-align: center;
-            padding: 1.5rem;
+            padding: 2rem;
             width: 100%;
+            margin-top: 2rem;
+            font-weight: 600;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        .back-to-top.show {
+            opacity: 1;
+        }
+        .back-to-top:hover {
+            background: #ff8a8a;
+            transform: scale(1.1);
+        }
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        [data-theme="dark"] a {
+            color: #81d4fa;
+        }
+        a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--border-color);
         }
         @media (max-width: 768px) {
             header {
@@ -81,11 +346,16 @@
             }
             section {
                 padding: 1rem;
-                margin: 0.5rem;
+                margin: 1rem;
             }
-            .item iframe {
-                width: 100%;
-                height: auto;
+            .stats {
+                flex-direction: column;
+            }
+            .back-to-top {
+                bottom: 1rem;
+                right: 1rem;
+                width: 40px;
+                height: 40px;
             }
         }
         @media (max-width: 480px) {
@@ -93,123 +363,328 @@
                 flex: 1 1 100%;
             }
             h1 {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
             h2 {
-                font-size: 1.2rem;
+                font-size: 1.5rem;
             }
+        }
+        .contact-form {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+        .contact-form button {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        .contact-form button:hover {
+            background: #ff8a8a;
         }
     </style>
 </head>
-<body>
+<body data-theme="light">
+
+    <div class="loader" id="loader">
+        <div class="spinner"></div>
+    </div>
 
     <header>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+        <img src="icon.png" alt="YallCode Logo">
         <h1>Welcome to YallCode</h1>
-        <p>Discover my apps, games, websites, YouTube channel, Discord server, and more!</p>
+        <p>Discover my apps, games, websites, YouTube channel, Discord server, and more! Dive into creative coding adventures.</p>
     </header>
 
     <nav>
         <a href="#apps">Apps</a>
         <a href="#games">Games</a>
+        <a href="#testimonials">Testimonials</a>
         <a href="#websites">Websites</a>
         <a href="#youtube">YouTube</a>
         <a href="#discord">Discord</a>
         <a href="#more">More</a>
     </nav>
 
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search for apps, games, or projects..." onkeyup="searchItems()">
+    </div>
+
     <section id="apps">
-        <h2 onclick="toggleSection('apps')">My Apps</h2>
-        <div class="item">
-            <h3>App Name 1</h3>
-            <p>Description of your first app. What it does, platforms it's available on, etc.</p>
-            <a href="link-to-app-store-or-download">Download Here</a>
+        <h2 onclick="toggleSection('apps')" class="accordion">My Apps</h2>
+        <div class="item" data-tags="app voice recorder android">
+            <h3>Findora - Voice Recorder</h3>
+            <p>A powerful voice recording app for capturing ideas on the go. Available on Android.</p>
+            <a href="https://play.google.com/store/apps/details?id=italk.findora.ko">Download on Google Play</a>
         </div>
-        <div class="item hidden">
-            <h3>App Name 2</h3>
-            <p>Description of your second app.</p>
-            <a href="link-to-app">Check It Out</a>
+        <div class="item" data-tags="app document management">
+            <h3>DocXpert</h3>
+            <p>Advanced document management tool for editing and organizing files effortlessly.</p>
+            <a href="https://apkpure.net/docxpert/com.yalla.docxpert">Download Here</a>
+        </div>
+        <div class="item" data-tags="app ocr text scan image">
+            <h3>Image to Text - OCR Text Scan</h3>
+            <p>Extract text from images using OCR technology. Perfect for quick scans and conversions.</p>
+            <a href="https://apkpure.net/image-to-text-ocr-text-scan/com.yalla.ocr">Check It Out</a>
         </div>
     </section>
 
     <section id="games">
-        <h2 onclick="toggleSection('games')">My Games</h2>
-        <div class="item">
-            <h3>Game Title 1</h3>
-            <p>Brief overview of the game, genre, platforms.</p>
-            <a href="link-to-game">Play Now</a>
+        <h2 onclick="toggleSection('games')" class="accordion">My Games</h2>
+        <div class="item" data-tags="game puzzle educational kids android">
+            <h3>Puzzle Game - Picture Puzzle</h3>
+            <p>An engaging educational puzzle game for kids and adults. Fun brain teasers with colorful pictures. Available on Android.</p>
+            <a href="https://play.google.com/store/apps/details?id=com.yalla.kidspuzzle">Play Now on Google Play</a>
         </div>
-        <div class="item hidden">
-            <h3>Game Title 2</h3>
-            <p>Another game description.</p>
-            <a href="link-to-game">Learn More</a>
+    </section>
+
+    <section id="testimonials">
+        <h2>Testimonials</h2>
+        <div class="carousel-container">
+            <div class="carousel-slides" id="carouselSlides">
+                <div class="slide">
+                    <p>"Amazing apps! Findora changed how I capture my thoughts."</p>
+                    <cite>- User A</cite>
+                </div>
+                <div class="slide">
+                    <p>"The puzzle game is perfect for my kids. Educational and fun!"</p>
+                    <cite>- Parent B</cite>
+                </div>
+                <div class="slide">
+                    <p>"Great community on Discord. Love the coding tips!"</p>
+                    <cite>- Dev C</cite>
+                </div>
+            </div>
+            <button class="carousel-btn prev" onclick="changeSlide(-1)">‹</button>
+            <button class="carousel-btn next" onclick="changeSlide(1)">›</button>
         </div>
     </section>
 
     <section id="websites">
-        <h2 onclick="toggleSection('websites')">My Websites</h2>
-        <div class="item">
-            <h3>Website Name 1</h3>
-            <p>What the website is about.</p>
-            <a href="https://your-website1.com">Visit Site</a>
-        </div>
-        <div class="item hidden">
-            <h3>Website Name 2</h3>
-            <p>Description here.</p>
-            <a href="https://your-website2.com">Go There</a>
+        <h2 onclick="toggleSection('websites')" class="accordion">My Websites</h2>
+        <div class="item" data-tags="website portfolio coding">
+            <h3>YallCode Portfolio</h3>
+            <p>This very site! Showcasing my latest projects and creations in coding and development.</p>
+            <a href="https://yallcode.com">Visit Site (Coming Soon)</a>
         </div>
     </section>
 
     <section id="youtube">
-        <h2 onclick="toggleSection('youtube')">My YouTube Channel</h2>
-        <div class="item">
-            <p>Subscribe to my channel for tutorials, gameplay, and more!</p>
+        <h2 onclick="toggleSection('youtube')" class="accordion">My YouTube Channel</h2>
+        <div class="item" data-tags="youtube tutorials coding">
+            <p>Subscribe to @yallaycode for coding tutorials, app development walkthroughs, game reviews, and creative content!</p>
             <a href="https://www.youtube.com/@yallaycode">Subscribe on YouTube</a>
         </div>
     </section>
 
     <section id="discord">
-        <h2 onclick="toggleSection('discord')">My Discord Server</h2>
-        <div class="item">
-            <p>Join my community on Discord for discussions, updates, and fun!</p>
+        <h2 onclick="toggleSection('discord')" class="accordion">My Discord Server</h2>
+        <div class="item" data-tags="discord community coding">
+            <p>Join the YallCode community on Discord for live discussions, project collaborations, updates, and fun coding challenges!</p>
             <a href="https://discord.gg/5g77KWdC">Join Discord</a>
         </div>
     </section>
 
+    <section id="stats" style="text-align: center;">
+        <h2>Quick Stats</h2>
+        <div class="stats">
+            <div>
+                <div class="stat" id="downloads">10K+</div>
+                <div class="stats-label">Downloads</div>
+            </div>
+            <div>
+                <div class="stat" id="subs">1K+</div>
+                <div class="stats-label">YouTube Subs</div>
+            </div>
+            <div>
+                <div class="stat" id="members">500+</div>
+                <div class="stats-label">Discord Members</div>
+            </div>
+        </div>
+    </section>
+
     <section id="more">
-        <h2 onclick="toggleSection('more')">More About Me</h2>
-        <div class="item">
-            <p>Additional info, like blogs, social media, contact details, etc.</p>
+        <h2 onclick="toggleSection('more')" class="accordion">More About Me</h2>
+        <div class="item" data-tags="social contact">
+            <p>Connect with me across platforms for the latest news and inspirations.</p>
             <ul>
                 <li><a href="https://x.com/YallCode">X (Twitter)</a></li>
                 <li><a href="https://whatsapp.com/channel/0029Vb6nYxwHgZWXHu4Bdd07">WhatsApp Channel</a></li>
                 <li>Email: yallcc.info@gmail.com</li>
                 <li>Main Email: yallbertgoum@gmail.com</li>
             </ul>
+            <div class="contact-form">
+                <h4>Send Me a Message!</h4>
+                <form action="https://formspree.io/f/your-form-id" method="POST">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 YallCode. All rights reserved.</p>
+        <p>&copy; 2025 YallCode. All rights reserved. | Built with passion for code.</p>
     </footer>
 
+    <button class="back-to-top" onclick="scrollToTop()" id="backToTop">↑</button>
+
     <script>
+        // Page Loader
+        window.addEventListener('load', () => {
+            document.getElementById('loader').classList.add('hidden');
+        });
+
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            document.querySelector('.theme-toggle').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.body.setAttribute('data-theme', savedTheme);
+        document.querySelector('.theme-toggle').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+        // Accordion Toggle
         function toggleSection(sectionId) {
             const section = document.getElementById(sectionId);
             const items = section.getElementsByClassName('item');
+            const header = section.querySelector('h2');
+            const isHidden = items[0] && items[0].classList.contains('hidden');
             for (let item of items) {
-                item.classList.toggle('hidden');
+                if (isHidden) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
             }
+            header.classList.toggle('active', isHidden);
         }
 
-        // Smooth scroll for nav links
+        // Smooth Scroll
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href').substring(1);
                 const targetSection = document.getElementById(targetId);
                 targetSection.scrollIntoView({ behavior: 'smooth' });
+                if (targetSection.querySelector('h2')) {
+                    targetSection.querySelector('h2').click();
+                }
             });
         });
+
+        // Initialize accordions
+        document.querySelectorAll('section').forEach(section => {
+            const firstItem = section.querySelector('.item');
+            if (firstItem) {
+                firstItem.style.display = 'block';
+            }
+        });
+
+        // Search Functionality
+        function searchItems() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const items = document.querySelectorAll('.item');
+            items.forEach(item => {
+                const tags = item.getAttribute('data-tags') || '';
+                const text = item.textContent.toLowerCase();
+                if (tags.includes(query) || text.includes(query)) {
+                    item.style.display = 'block';
+                    item.classList.remove('hidden');
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Back to Top
+        window.onscroll = function() {
+            const button = document.getElementById('backToTop');
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                button.classList.add('show');
+            } else {
+                button.classList.remove('show');
+            }
+        };
+
+        function scrollToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+
+        // Form Submission Feedback
+        document.querySelector('form').addEventListener('submit', function(e) {
+            alert('Message sent! (Set up Formspree for real submissions)');
+        });
+
+        // Stats Animation
+        function animateStats() {
+            const stats = ['downloads', 'subs', 'members'];
+            stats.forEach(id => {
+                const el = document.getElementById(id);
+                const target = parseInt(el.textContent);
+                let current = 0;
+                const increment = target / 100;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        el.textContent = target + '+';
+                        clearInterval(timer);
+                    } else {
+                        el.textContent = Math.floor(current) + '+';
+                    }
+                }, 20);
+            });
+        }
+
+        // Trigger stats on scroll into view
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+        statsObserver.observe(document.getElementById('stats'));
+
+        // Carousel
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide >= slides.length) currentSlide = 0;
+            if (currentSlide < 0) currentSlide = slides.length - 1;
+            document.getElementById('carouselSlides').style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        // Auto-slide every 5 seconds
+        setInterval(() => changeSlide(1), 5000);
     </script>
 
 </body>
