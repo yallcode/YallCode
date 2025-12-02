@@ -6,28 +6,168 @@
     <title>YallCode - Games & Projects</title>
     <link rel="icon" href="icon.png" type="image/png">
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; }
-        header { background-color: #333; color: white; text-align: center; padding: 2rem; }
-        header h1 { margin: 0; }
-        header a { color: #4CAF50; text-decoration: none; }
-        section { padding: 2rem; max-width: 1200px; margin: 0 auto; }
-        h2 { color: #333; border-bottom: 2px solid #4CAF50; padding-bottom: 0.5rem; }
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
-        .project-card { background: white; border-radius: 8px; padding: 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .project-card h3 { margin-top: 0; color: #4CAF50; }
-        .project-card a { color: #4CAF50; font-weight: bold; }
-        footer { background-color: #333; color: white; text-align: center; padding: 1rem; }
+        body { 
+            font-family: 'Arial', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #121212; 
+            color: #ffffff; 
+        }
+        header { 
+            background: linear-gradient(135deg, #1e1e1e, #2d2d2d); 
+            color: white; 
+            text-align: center; 
+            padding: 3rem 2rem; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        header h1 { 
+            margin: 0; 
+            font-size: 3rem; 
+            background: linear-gradient(45deg, #00ff88, #00ccff); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            background-clip: text;
+        }
+        header a { 
+            color: #00ff88; 
+            text-decoration: none; 
+            transition: color 0.3s ease;
+        }
+        header a:hover { color: #00ccff; }
+        section { 
+            padding: 2rem; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+        h2 { 
+            color: #00ff88; 
+            border-bottom: 2px solid #00ff88; 
+            padding-bottom: 0.5rem; 
+            font-size: 2rem;
+        }
+        .project-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 1.5rem; 
+        }
+        .project-card { 
+            background: linear-gradient(145deg, #1e1e1e, #2a2a2a); 
+            border-radius: 12px; 
+            padding: 1.5rem; 
+            box-shadow: 0 4px 15px rgba(0,255,136,0.2); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 25px rgba(0,255,136,0.3); 
+        }
+        .project-card h3 { 
+            margin-top: 0; 
+            color: #00ff88; 
+            font-size: 1.5rem;
+        }
+        .project-card a { 
+            color: #00ccff; 
+            font-weight: bold; 
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 1px solid #00ff88;
+            border-radius: 25px;
+            display: inline-block;
+            margin: 0.25rem;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+        .project-card a:hover { 
+            background: linear-gradient(45deg, #00ff88, #00ccff); 
+            color: #121212; 
+            transform: scale(1.05);
+        }
+        .live-badge {
+            background: #00ff88;
+            color: #121212;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+        #socials {
+            background: linear-gradient(135deg, #1e1e1e, #2d2d2d);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+        #socials iframe {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            width: 100%;
+            height: 315px; /* Standard 16:9 aspect ratio for normal videos; responsive */
+            max-width: 560px;
+            aspect-ratio: 16 / 9;
+        }
+        .social-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+            margin-top: 1rem;
+        }
+        .social-item {
+            text-align: left;
+        }
+        .social-item h3 {
+            color: #00ff88;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        footer { 
+            background-color: #1e1e1e; 
+            color: #ffffff; 
+            text-align: center; 
+            padding: 1.5rem; 
+            margin-top: 3rem;
+        }
     </style>
+    <!-- Twitter Widget Script -->
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </head>
 <body>
     <header>
         <h1>YallCode</h1>
         <p>Building games and cool stuff | 
             <a href="https://github.com/yallcode" target="_blank">GitHub</a> | 
-            <a href="https://x.com/YallCode" target="_blank">X (Twitter)</a> | 
+            <a href="https://x.com/YallCode" target="_blank">X</a> | 
             <a href="https://www.youtube.com/@YallaYCode" target="_blank">YouTube</a>
         </p>
     </header>
+
+    <section id="socials">
+        <h2>Latest From Socials</h2>
+        <div class="social-grid">
+            <div class="social-item">
+                <h3>Latest YouTube Video</h3>
+                <iframe 
+                    src="https://www.youtube-nocookie.com/embed/Yioi-KuAI0Q" 
+                    title="Latest YallCode Video" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation allow-popups" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
+                    allowfullscreen>
+                </iframe>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">Deep dive into coding—watch, like, and subscribe for more!</p>
+            </div>
+            <div class="social-item">
+                <h3>Latest X Post</h3>
+                <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Who wanna try my pawinder(tinder but cat version)?<a href="https://t.co/9hnqjEkyRl">https://t.co/9hnqjEkyRl</a></p>&mdash; Yall Code (@YallCode) <a href="https://twitter.com/YallCode/status/1995992066883465716?ref_src=twsrc%5Etfw">December 2, 2025</a></blockquote> 
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+        </div>
+    </section>
 
     <section id="games">
         <h2>Games</h2>
@@ -35,13 +175,14 @@
             <div class="project-card">
                 <h3>Tic-Tac-Toe Multiplayer</h3>
                 <p>A fun multiplayer Tic Tac Toe game with room creation, joining by code, and difficulty levels (Easy, Normal, Hard).</p>
-                <a href="https://yallcode.github.io/TicTacToe/" target="_blank">Play/Demo</a> | 
+                <a href="https://yallcode.github.io/TicTacToe/" target="_blank">Play Now</a> | 
                 <a href="https://github.com/yallcode/TicTacToe" target="_blank">Source Code</a>
             </div>
             <div class="project-card">
                 <h3>Pawinder - Cat Tinder</h3>
-                <p>A Tinder-style matching app for cats—swipe on kitties, get matches, and enjoy the paw-some fun!</p>
-                <a href="https://yallcode.github.io/Pawinder/" target="_blank">Play/Demo</a> | 
+                <span class="live-badge">Live Web App</span>
+                <p>A Tinder-style matching app for cats—swipe on kitties, get matches, and enjoy the paw-some fun! Fully interactive and ready to play.</p>
+                <a href="https://yallcode.github.io/Pawinder/" target="_blank">Swipe Cats</a> | 
                 <a href="https://github.com/yallcode/Pawinder" target="_blank">Source Code</a>
             </div>
             <!-- Add more games here as you build them -->
