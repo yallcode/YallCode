@@ -9,3 +9,6 @@
 - 😄 Pronouns: Him
 - ⚡ Fun fact: I have normal youtube channel: HalalDeveloperYall
 
+Here is the link to enter the site:
+
+[https://YallCode.github.io/YallCode/](url)
