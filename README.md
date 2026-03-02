@@ -11,4 +11,4 @@
 
 Here is the link to enter the site:
 
-[https://yallcode.github.io/YallCode/](url)
+https://yallcode.github.io/YallCode/
